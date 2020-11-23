@@ -15,6 +15,7 @@ default_string_encoding = 'utf-8'
 parent_dir_path = os.path.dirname(os.path.realpath(__file__))
 
 app = FastAPI()
+oplossing = "Hallo"
 
 app.mount("/static", StaticFiles(directory=parent_dir_path + "/static"), name="static")
 
@@ -44,7 +45,7 @@ def hash_hexdigest(file, hash_buffer):
     return hash(file, hash_buffer).hexdigest()
 
 def hex_encode(message: str):
-    hex_text = '5363686174'
+    hex_text = '48616c6c6f'
     text_decode = bytes.fromhex(hex_text)
     text = text_decode.decode(encoding='utf_8')
     return hex_text, text_decode, text
@@ -238,10 +239,10 @@ opdracht7_json = {
     "opdracht" : {
         "id" : 7,
         "beschrijving" : (
-            "proficiat bereken nu het woord naar de juiste waarden:"
-            "Je URL zal er dus als volgt uitzien: .../opdracht8/JeHexadecimaleWaarde")
+            "Plaats het byte bericht naar een leesbaar woord. Nadien plaats je het antwoord als volgt:"
+            "link .../opdracht8/HetWoord")
     },
-    "string": "5363686174",
+    "string": "48616c6c6f",
 }
 
 @app.post("/opdracht7")
@@ -267,10 +268,11 @@ opdracht8_json = {
     "opdracht" : {
         "id" : 8,
         "beschrijving" : (
-            "U hebt de schat gevonden gefeliciteerd ")
+            "Proficiat u hebt gewonnen")
     },
 }
 
-@app.post("/opdracht8/Schat")
+@app.post("/opdracht8/Hallo")
 async def opdracht8():
     return opdracht8_json
+
