@@ -43,6 +43,12 @@ def hash(file, hash_buffer):
 def hash_hexdigest(file, hash_buffer):
     return hash(file, hash_buffer).hexdigest()
 
+def hex_encode(message: str):
+    hex_text = '5363686174'
+    text_decode = bytes.fromhex(hex_text)
+    text = text_decode.decode(encoding='utf_8')
+    return hex_text, text_decode, text
+
 class Opdracht2Body(BaseModel):
     nr1: str
     nr2: str
@@ -58,6 +64,9 @@ class Opdracht7Body(BaseModel):
     bericht_versleuteld: str
     sleutel: str
     nonce: str
+
+class Opdracht8Body(BaseModel):
+     text: str
 
 fout_antwoord = Response(content='Fout antwoord!')
 
@@ -229,8 +238,10 @@ opdracht7_json = {
     "opdracht" : {
         "id" : 7,
         "beschrijving" : (
-            "Hier stopt voorlopig je zoektocht!")
-    }
+            "proficiat bereken nu het woord naar de juiste waarden:"
+            "Je URL zal er dus als volgt uitzien: .../opdracht8/JeHexadecimaleWaarde")
+    },
+    "string": "5363686174",
 }
 
 @app.post("/opdracht7")
@@ -251,3 +262,15 @@ async def opdracht7(body: Opdracht7Body):
             return fout_antwoord
     except:
         return fout_antwoord
+        
+opdracht8_json = {
+    "opdracht" : {
+        "id" : 8,
+        "beschrijving" : (
+            "U hebt de schat gevonden gefeliciteerd ")
+    },
+}
+
+@app.post("/opdracht8/Schat")
+async def opdracht8():
+    return opdracht8_json
